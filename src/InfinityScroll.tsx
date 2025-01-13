@@ -2,9 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 
 const InfiniteScroll: React.FC = () => {
-  const [items, setItems] = useState<string[]>([]); // 반복할 div의 내용
+  const [items, setItems] = useState<string[]>(["Item"]); // 첫 번째 'Item'을 기본값으로 추가
   const [loading, setLoading] = useState<boolean>(false);
-  const { ref, inView } = useInView();
+  const { ref, inView } = useInView({
+    triggerOnce: false, // 하나만 트리거되지 않게 설정
+    threshold: 0.1, // 10% 이상 보일 때 트리거
+  });
 
   const loadMoreItems = () => {
     setLoading(true);
@@ -19,7 +22,7 @@ const InfiniteScroll: React.FC = () => {
     if (inView && !loading) {
       loadMoreItems(); // `div`가 화면에 보일 때마다 새로운 아이템 추가
     }
-  }, [inView]);
+  }, [inView, loading]); // `loading` 상태를 의존성 배열에 추가하여 무한히 호출되지 않게 방지
 
   return (
     <div style={{ padding: "20px" }}>
