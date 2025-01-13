@@ -2,27 +2,36 @@ import React, { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 
 const InfiniteScroll: React.FC = () => {
-  const [items, setItems] = useState<string[]>(["Item"]); // 첫 번째 'Item'을 기본값으로 추가
+  const [items, setItems] = useState<string[]>([]); // 반복할 div의 내용
   const [loading, setLoading] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1); // 현재 페이지 상태
   const { ref, inView } = useInView({
-    triggerOnce: false, // 하나만 트리거되지 않게 설정
+    triggerOnce: false, // 계속해서 트리거되도록 설정
     threshold: 0.1, // 10% 이상 보일 때 트리거
   });
 
   const loadMoreItems = () => {
     setLoading(true);
-    // 새로운 아이템을 추가 (여기서는 "Item" 텍스트만 반복)
+    // 페이지마다 새로운 아이템 20개를 추가
     setTimeout(() => {
-      setItems((prev) => [...prev, "Item"]);
+      const newItems = Array.from(
+        { length: 20 },
+        (_, index) => `Item ${index + 1 + (page - 1) * 20}`
+      );
+      setItems((prev) => [...prev, ...newItems]);
       setLoading(false);
     }, 1000); // 예시로 1초 딜레이를 주어 로딩 상태를 시뮬레이션
   };
 
   useEffect(() => {
     if (inView && !loading) {
-      loadMoreItems(); // `div`가 화면에 보일 때마다 새로운 아이템 추가
+      setPage((prev) => prev + 1); // 페이지 증가
     }
-  }, [inView, loading]); // `loading` 상태를 의존성 배열에 추가하여 무한히 호출되지 않게 방지
+  }, [inView, loading]);
+
+  useEffect(() => {
+    loadMoreItems(); // 페이지가 바뀔 때마다 새로운 아이템 로드
+  }, [page]);
 
   return (
     <div style={{ padding: "20px" }}>
