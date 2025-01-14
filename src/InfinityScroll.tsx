@@ -2,6 +2,14 @@ import { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import { getPostList, postType } from "./postList";
 
+const Container = styled.div`
+  width: 100%;
+  max-width: 1000px;
+  margin: 4rem auto;
+`;
+
+const PostItem = styled.div``;
+
 const InfiniteScroll = (): JSX.Element => {
   const [page, setPage] = useState<number>(1);
   const [posts, setPosts] = useState<postType[]>(getPostList(1));
@@ -42,11 +50,3 @@ const InfiniteScroll = (): JSX.Element => {
 };
 
 export default InfiniteScroll;
-
-const Container = styled.div`
-  width: 100%;
-  max-width: 1000px;
-  margin: 4rem auto;
-`;
-
-const PostItem = styled.div``;
