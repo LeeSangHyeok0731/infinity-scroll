@@ -60,4 +60,7 @@ export const postList: postType[] = [
   { title: "상혁", content: "프론트엔드 퍼포먼스 최적화" },
   { title: "Sang Hyuk", content: "웹 프로토타입 개발자" },
   { title: "이상혁", content: "프론트엔드 기술 리더" },
+  { title: "이상혁", content: "프론트엔드 기술 리더" },
+  { title: "이상혁", content: "프론트엔드 기술 리더" },
+  { title: "이상혁", content: "프론트엔드 기술 리더" },
 ];
