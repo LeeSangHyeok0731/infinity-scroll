@@ -52,6 +52,7 @@ const InfiniteScroll = (): JSX.Element => {
         </PostItem>
       ))}
       {loading && <p>Loading...</p>} {/* 🔥 로딩 상태 표시 */}
+      {getPostList(page) === posts && <p>더이상 데이터가 없습니다</p>}
     </Container>
   );
 };
