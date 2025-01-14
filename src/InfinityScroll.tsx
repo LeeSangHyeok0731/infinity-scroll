@@ -30,7 +30,7 @@ const InfiniteScroll = (): JSX.Element => {
       setMax(true);
       return;
     }
-    // 🔥 로딩 중이 아니고, 스크롤이 300px 이내로 도달하면 데이터 로드
+    // 🔥 로딩 중이 아니고, 스크롤이 500px 이내로 도달하면 데이터 로드
     if (!loading && scrollTop + innerHeight >= scrollHeight - 500) {
       console.log(max);
       setLoading(true); // 🔥 중복 방지
@@ -43,7 +43,7 @@ const InfiniteScroll = (): JSX.Element => {
   }, [loading, page]);
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll, { passive: true }); // 🔥 passive 적용
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -59,7 +59,7 @@ const InfiniteScroll = (): JSX.Element => {
           <p>{post.content}</p>
         </PostItem>
       ))}
-      {loading && <p>Loading...</p>} {/* 🔥 로딩 상태 표시 */}
+      {loading && <p>Loading...</p>}
       {max && <p>더이상 데이터가 없습니다</p>}
     </Container>
   );
