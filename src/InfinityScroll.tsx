@@ -24,7 +24,7 @@ const InfiniteScroll = (): JSX.Element => {
     const { scrollTop } = document.documentElement;
 
     // 🔥 로딩 중이 아니고, 스크롤이 300px 이내로 도달하면 데이터 로드
-    if (!loading && scrollTop + innerHeight >= scrollHeight - 300) {
+    if (!loading && scrollTop + innerHeight >= scrollHeight - 500) {
       setLoading(true); // 🔥 중복 방지
       setTimeout(() => {
         setPosts((prevPosts) => prevPosts.concat(getPostList(page + 10)));
