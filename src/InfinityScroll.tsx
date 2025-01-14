@@ -18,16 +18,21 @@ const InfiniteScroll = (): JSX.Element => {
   const [posts, setPosts] = useState<postType[]>(getPostList(10));
   const [loading, setLoading] = useState<boolean>(false); // 🔥 로딩 상태 추가
 
+  const [max, setMax] = useState<boolean>(false);
+
   const handleScroll = useCallback((): void => {
     const { innerHeight } = window;
     const { scrollHeight } = document.body;
     const { scrollTop } = document.documentElement;
 
-    // 🔥 로딩 중이 아니고, 스크롤이 300px 이내로 도달하면 데이터 로드
-    if (getPostList(page) === posts) {
+    const last = getPostList(page);
+    if (last.length === 0) {
+      setMax(true);
       return;
     }
+    // 🔥 로딩 중이 아니고, 스크롤이 300px 이내로 도달하면 데이터 로드
     if (!loading && scrollTop + innerHeight >= scrollHeight - 500) {
+      console.log(max);
       setLoading(true); // 🔥 중복 방지
       setTimeout(() => {
         setPosts((prevPosts) => prevPosts.concat(getPostList(page + 10)));
@@ -55,7 +60,7 @@ const InfiniteScroll = (): JSX.Element => {
         </PostItem>
       ))}
       {loading && <p>Loading...</p>} {/* 🔥 로딩 상태 표시 */}
-      {getPostList(page) === posts && <p>더이상 데이터가 없습니다</p>}
+      {max && <p>더이상 데이터가 없습니다</p>}
     </Container>
   );
 };
