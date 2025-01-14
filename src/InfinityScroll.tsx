@@ -15,7 +15,7 @@ const PostItem = styled.div`
 
 const InfiniteScroll = (): JSX.Element => {
   const [page, setPage] = useState<number>(0);
-  const [posts, setPosts] = useState<postType[]>(getPostList(10));
+  const [posts, setPosts] = useState<postType[]>(getPostList(50));
   const [loading, setLoading] = useState<boolean>(false); // 🔥 로딩 상태 추가
 
   const [max, setMax] = useState<boolean>(false);
