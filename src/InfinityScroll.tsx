@@ -14,8 +14,8 @@ const PostItem = styled.div`
 `;
 
 const InfiniteScroll = (): JSX.Element => {
-  const [page, setPage] = useState<number>(1);
-  const [posts, setPosts] = useState<postType[]>(getPostList(1));
+  const [page, setPage] = useState<number>(0);
+  const [posts, setPosts] = useState<postType[]>(getPostList(10));
   const [loading, setLoading] = useState<boolean>(false); // 🔥 로딩 상태 추가
 
   const handleScroll = useCallback((): void => {
@@ -27,7 +27,7 @@ const InfiniteScroll = (): JSX.Element => {
     if (!loading && scrollTop + innerHeight >= scrollHeight - 300) {
       setLoading(true); // 🔥 중복 방지
       setTimeout(() => {
-        setPosts((prevPosts) => prevPosts.concat(getPostList(page + 1)));
+        setPosts((prevPosts) => prevPosts.concat(getPostList(page + 10)));
         setPage((prevPage) => prevPage + 1);
         setLoading(false); // 🔥 로딩 끝
       }, 1000); // 🔥 로딩 시뮬레이션
@@ -47,6 +47,7 @@ const InfiniteScroll = (): JSX.Element => {
       {posts.map((post: postType, idx: number) => (
         <PostItem key={idx}>
           <h3>{post.title}</h3>
+          <div>{idx}</div>
           <p>{post.content}</p>
         </PostItem>
       ))}
