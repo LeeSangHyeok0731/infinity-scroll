@@ -47,7 +47,7 @@ const InfiniteScroll = (): JSX.Element => {
       {posts.map((post: postType, idx: number) => (
         <PostItem key={idx}>
           <h3>{post.title}</h3>
-          <div>{idx}</div>
+          <div>{idx + 1}</div>
           <p>{post.content}</p>
         </PostItem>
       ))}
