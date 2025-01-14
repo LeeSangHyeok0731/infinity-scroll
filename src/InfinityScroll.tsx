@@ -28,7 +28,7 @@ const InfiniteScroll = (): JSX.Element => {
       setLoading(true); // 🔥 중복 방지
       setTimeout(() => {
         setPosts((prevPosts) => prevPosts.concat(getPostList(page + 10)));
-        setPage((prevPage) => prevPage + 1);
+        setPage((prevPage) => prevPage + 10);
         setLoading(false); // 🔥 로딩 끝
       }, 1000); // 🔥 로딩 시뮬레이션
     }
