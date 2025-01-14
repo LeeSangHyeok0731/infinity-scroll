@@ -26,6 +26,7 @@ const InfiniteScroll = (): JSX.Element => {
     const { scrollTop } = document.documentElement;
 
     const last = getPostList(page);
+    console.log(last.length);
     if (last.length === 0) {
       setMax(true);
       return;
@@ -37,6 +38,7 @@ const InfiniteScroll = (): JSX.Element => {
         setPosts((prevPosts) => prevPosts.concat(getPostList(page + 50)));
         setPage((prevPage) => prevPage + 50);
         setLoading(false); // 로딩 끝
+        console.log();
       }, 1000); //  로딩 시뮬레이션
     }
   }, [loading, page]);
