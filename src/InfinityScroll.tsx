@@ -34,8 +34,8 @@ const InfiniteScroll = (): JSX.Element => {
     if (!loading && scrollTop + innerHeight >= scrollHeight - page * 200) {
       setLoading(true); //중복 방지
       setTimeout(() => {
-        setPosts((prevPosts) => prevPosts.concat(getPostList(page + 10)));
-        setPage((prevPage) => prevPage + 10);
+        setPosts((prevPosts) => prevPosts.concat(getPostList(page + 50)));
+        setPage((prevPage) => prevPage + 50);
         setLoading(false); // 로딩 끝
       }, 1000); //  로딩 시뮬레이션
     }
