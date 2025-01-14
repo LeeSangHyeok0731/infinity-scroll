@@ -30,15 +30,14 @@ const InfiniteScroll = (): JSX.Element => {
       setMax(true);
       return;
     }
-    // 🔥 로딩 중이 아니고, 스크롤이 500px 이내로 도달하면 데이터 로드
+    //  로딩 중이 아니고, 스크롤이 500px 이내로 도달하면 데이터 로드
     if (!loading && scrollTop + innerHeight >= scrollHeight - 500) {
-      console.log(max);
-      setLoading(true); // 🔥 중복 방지
+      setLoading(true); //중복 방지
       setTimeout(() => {
         setPosts((prevPosts) => prevPosts.concat(getPostList(page + 10)));
         setPage((prevPage) => prevPage + 10);
-        setLoading(false); // 🔥 로딩 끝
-      }, 1000); // 🔥 로딩 시뮬레이션
+        setLoading(false); // 로딩 끝
+      }, 1000); //  로딩 시뮬레이션
     }
   }, [loading, page]);
 
