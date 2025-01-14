@@ -6,7 +6,7 @@ export type postType = {
 
 export const getPostList = (page: number): postType[] => {
   console.log(page);
-  return postList.filter((_, index) => index <= page && index > page - 10);
+  return postList.filter((_, index) => index <= page && index > page);
 };
 
 export const postList: postType[] = [
